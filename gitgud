@@ -18,6 +18,9 @@ case $1 in
         cd $GITGUD_PATH
         python3 pizza_order.py
         ;;
+    "clone-user")
+        $GITGUD_PATH/clone_from_user.sh $2 $3
+	;;
     "help")
         printf "%s\n" "Usage: gitgud [arg]. The available arguments are:"
         printf "\t%s\n" "pull - pull all git repositories in current directory"
