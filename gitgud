@@ -2,11 +2,18 @@
 
 if [[ $# = "0" ]]; then
     printf "Error: no argument provided\n"
+    exit 0
 fi
+
+PACKAGE="/home/eyobw/GitGud"
 
 case $1 in
     "pull")
-        ~/GitGud/pull_repos.sh
+        $PACKAGE/pull_repos.sh
+        ;;
+    "pizza")
+        cd $PACKAGE
+        python3 pizza_order.py
         ;;
     *)
         printf "Error: unrecognized argument\n"
