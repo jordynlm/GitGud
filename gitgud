@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $# = "0" ]]; then
+    printf "Error: no argument provided\n"
+fi
+
+case $1 in
+    "pull")
+        ~/GitGud/pull_repos.sh
+        ;;
+    *)
+        printf "Error: unrecognized argument\n"
+        ;;
+esac
+
