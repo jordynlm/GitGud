@@ -23,10 +23,22 @@ function find_git_repos {
     for f in $1/*; do
         if [[ -d ${f} && ! -L ${f} ]]; then
             if [[ ${f:(-4)} = ".git" ]]; then
-                printf "%s\n" "Attempting to pull in $1"
                 found_git=true
-                ( cd $1 ; git pull )
-                printf "%s\n" "-----------------------------------"
+
+                if [[ ${args[0]} = "log" ]]; then
+                    printf "%s\n" "Attempting to pull in $1"
+                    echo "Attempting to pull in $1
+                    " >> $org_dir/gitgud_err.txt
+                    
+                    ( cd $1 ; git pull |& tee -a $org_dir/gitgud_err.txt )
+                    
+                    printf "%s\n" "-----------------------------------"
+                    echo "-----------------------------------" >> $org_dir/gitgud_err.txt
+                else
+                    printf "%s\n" "Attempting to pull in $1"
+                    ( cd $1 ; git pull )
+                    printf "%s\n" "-----------------------------------"
+                fi
             fi
         fi
     done
@@ -40,5 +52,10 @@ function find_git_repos {
     fi
 }
 
+args=("$@")
+if [[ ${args[0]} = "log" ]]; then
+    org_dir=$(pwd)
+    echo "" > gitgud_err.txt
+fi
 find_git_repos .
 
