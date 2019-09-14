@@ -19,13 +19,17 @@ then
 fi
 
 #get repos from file
-while IFS= read -r line
+#while IFS= read -r line
+cat $filename | while read line
 do
-	if ![ $line =~ "%" ]
+	echo "$line"
+
+	if [[ ! $line == *"%"* ]] && [ ! -z "$line" ]  
+	then
 		echo "Attempting to clone: $line"
 		git clone $line
 	fi
-done < "$filename"
+done
 
-echo "All repos in $filename cloned."
+echo "All repos $filename cloned."
 
