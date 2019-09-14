@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s dotglob
+
 function print_all_dirs {
     TABS=""
     for ((i = 0; i < $2; i++))
@@ -16,13 +18,25 @@ function print_all_dirs {
     done
 }
 
-function print_tabs {
-    for ((i = 0; i < $1; i++))
-    do
-        printf "\t"
+function find_git_repos {
+    found_git=false
+    for f in $1/*; do
+        if [[ -d ${f} && ! -L ${f} ]]; then
+            if [[ ${f:(-4)} = ".git" ]]; then
+                printf "%s\n" "$f"
+                found_git=true
+            fi
+        fi
     done
-    printf "here\n"
+
+    if [[ $found_git = false ]]; then
+        for f in $1/*; do
+            if [[ -d ${f} && ! -L ${f} ]]; then
+                find_git_repos $f
+            fi
+        done
+    fi
 }
 
-print_all_dirs . 0
+find_git_repos .
 
