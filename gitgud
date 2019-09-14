@@ -11,12 +11,22 @@ case $1 in
     "pull")
         $PACKAGE/pull_repos.sh
         ;;
+    "push")
+        $PACKAGE/push_repos.sh
+        ;;
     "pizza")
         cd $PACKAGE
         python3 pizza_order.py
         ;;
+    "help")
+        printf "%s\n" "Usage: gitgud [arg]. The available arguments are:"
+        printf "\t%s\n" "pull - pull all git repositories in current directory"
+        printf "\t%s\n" "push - push all git repositories in current direcotry"
+        printf "\t%s\n" "pizza - order pizza"
+        printf "\t%s\n" "help - see this help text"
+        ;;
     *)
-        printf "Error: unrecognized argument\n"
+        printf "Error: unrecognized argument. Run 'gitgud help' to see what arguments are available.\n"
         ;;
 esac
 
