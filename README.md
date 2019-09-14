@@ -1,6 +1,7 @@
 # GitGud
 Contains command line commands to make GitHub functionalities more effecient, especially in the case of performing commands on multiple repos simultaneously.
 
+Before use, in addition to cloning, users will need to set environmental variable GITGUD_PATH as being the path to the cloned GitGud repository.
 
 Usage of gitgudstackoverflow.py:
 
