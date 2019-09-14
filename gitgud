@@ -12,6 +12,7 @@ case $1 in
         $PACKAGE/pull_repos.sh
         ;;
     "push")
+        git config --global credential.helper 'cache --timeout=900'
         $PACKAGE/push_repos.sh
         ;;
     "pizza")

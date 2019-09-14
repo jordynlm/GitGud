@@ -25,8 +25,17 @@ function find_git_repos {
             if [[ ${f:(-4)} = ".git" ]]; then
                 printf "%s\n" "Attempting to push in $1"
                 found_git=true
-                ( cd $1 ; git push )
+                orig_dir=$(pwd)
+                
+                cd $1
+                output="$(git push)"
+                printf "$output"
                 printf "%s\n" "-----------------------------------"
+
+                echo "Attempting to push in $1" > $orig_dir/gitgud_err.txti
+                echo "$output" >> $orig_dir/gitgud_err.txt
+                echo "-----------------------------------
+                " >> gitgud_err.txt
             fi
         fi
     done
