@@ -23,6 +23,7 @@ function find_git_repos {
     for f in $1/*; do
         if [[ -d ${f} && ! -L ${f} ]]; then
             if [[ ${f:(-4)} = ".git" ]]; then
+                printf "%s\n" "Attempting to pull in $1"
                 found_git=true
                 ( cd $1 ; git pull )
                 printf "%s\n" "-----------------------------------"
