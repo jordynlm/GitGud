@@ -26,8 +26,8 @@ function find_git_repos {
                 found_git=true
 
                 if [[ ${args[0]} = "log" ]]; then
-                    printf "%s\n" "Attempting to pull in $1"
-                    echo "Attempting to pull in $1
+                    printf "%s\n" "Attempting to ${args[0]} in $1"
+                    echo "Attempting to ${args[0]} in $1
                     " >> $org_dir/gitgud_err.txt
                     
                     ( cd $1 ; $git_command |& tee -a $org_dir/gitgud_err.txt )
@@ -35,7 +35,7 @@ function find_git_repos {
                     printf "%s\n" "-----------------------------------"
                     echo "-----------------------------------" >> $org_dir/gitgud_err.txt
                 else
-                    printf "%s\n" "Attempting to pull in $1"
+                    printf "%s\n" "Attempting to ${args[0]} in $1"
                     ( cd $1 ; $git_command )
                     printf "%s\n" "-----------------------------------"
                 fi
