@@ -8,7 +8,7 @@ fi
 
 case $1 in
     "pull")
-        $GITGUD_PATH/pull_repos.sh
+        $GITGUD_PATH/pull_repos.sh $2
         ;;
     "push")
         git config --global credential.helper 'cache --timeout=900'
