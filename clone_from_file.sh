@@ -3,6 +3,9 @@
 # repos listed there
 #the script skips any lines preceded by a '%'
 
+#save credentials so that user does no have to reenter data
+git config --global credential.helper 'cache--timeout=900'
+
 #get file detailing repos
 echo Please input the name of the file listing the repos you would like to clone...
 read filename

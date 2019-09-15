@@ -1,5 +1,0 @@
-%list of repos to clone
-
-https://github.com/tolabinjo/DrillHelper
-
-https://github.com/EWol234/first_website.git
