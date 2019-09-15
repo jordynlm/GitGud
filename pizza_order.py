@@ -21,7 +21,7 @@ security_code = input("\tSecurity Code: ")
 expr_date = input("\tExpiration Date (MMYY): ")
 zip_code = input("\tZip Code: ")
 
-confirmation = input("YOU ARE ABOUT TO ORDER PIZZA. DO YOU WANT PIZZA [Y/N]? ")
+confirmation = input("\nYOU ARE ABOUT TO ORDER PIZZA. DO YOU WANT PIZZA [Y/N]? ")
 if confirmation.lower() == 'y':
     order.pay_with(PaymentObject(card_num, expr_date, security_code, zip_code))
 
