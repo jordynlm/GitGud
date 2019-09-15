@@ -26,17 +26,17 @@ function find_git_repos {
                 found_git=true
 
                 if [[ ${args[0]} = "log" ]]; then
-                    printf "%s\n" "Attempting to pull in $1"
-                    echo "Attempting to pull in $1
-                    " >> $org_dir/gitgud_err.txt
+                    printf "%s\n" "Attempting to ${args[0]} in $1"
+                    echo "Attempting to ${args[0]} in $1
+                    " >> $log_file
                     
-                    ( cd $1 ; git pull |& tee -a $org_dir/gitgud_err.txt )
+                    ( cd $1 ; $git_command |& tee -a $log_file )
                     
                     printf "%s\n" "-----------------------------------"
-                    echo "-----------------------------------" >> $org_dir/gitgud_err.txt
+                    echo "-----------------------------------" >> $log_file
                 else
-                    printf "%s\n" "Attempting to pull in $1"
-                    ( cd $1 ; git pull )
+                    printf "%s\n" "Attempting to ${args[0]} in $1"
+                    ( cd $1 ; $git_command )
                     printf "%s\n" "-----------------------------------"
                 fi
             fi
@@ -53,9 +53,22 @@ function find_git_repos {
 }
 
 args=("$@")
-if [[ ${args[0]} = "log" ]]; then
-    org_dir=$(pwd)
-    echo "" > gitgud_err.txt
+git_command="git pull"
+if [[ ${args[0]} = "push" ]]; then
+    git_command="git push"
+fi
+if [[ ${args[1]} = "log" ]]; then
+    if [[ ${args[2]} != "" ]]; then
+        log_file=${args[2]}
+        if [[ ${log_file:0:1} != "/" && ${log_file:0:1} != "~" && ${log_file:0:1} != "." ]]; then
+            org_dir=$(pwd)
+            log_file=$org_dir/$log_file
+        fi
+    else
+        org_dir=$(pwd)
+        log_file=$org_dir/gitgud_err.txt
+    fi
+    echo "" > $log_file
 fi
 find_git_repos .
 
