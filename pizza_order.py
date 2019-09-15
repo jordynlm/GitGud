@@ -1,11 +1,31 @@
 from pizzapi import *
 
-with open('pizza_info.txt', 'r') as f:
-    lines = f.readlines()
+try:
+    with open('pizza_info.txt', 'r') as f:
+        lines = f.readlines()
 
-customer = Customer(*lines[0].split(','))
-address  = Address(*lines[1].split(','))
-store = address.closest_store()
+    customer = Customer(*lines[0].split(','))
+    address  = Address(*lines[1].split(','))
+    store = address.closest_store()
+except:
+    print("Thank you for using gitgud pizza! Please enter your information below:")
+    first_name = input("\tFirst Name: ")
+    last_name = input("\tLast Name: ")
+    email = input("\tEmail: ")
+    phone = input("\tPhone: ")
+
+    street = input("\tStreet Address: ")
+    city = input("\tCity: ")
+    state = input("\tState: ")
+    zip_code = input("\tZip Code: ")
+
+    customer = Customer(first_name, last_name, email, phone)
+    address = Address(street, city, state, zip_code)
+    store = address.closest_store()
+
+    with open('pizza_info.txt', 'w+') as f:
+        f.write(','.join([first_name, last_name, email, phone]) + '\n')
+        f.write(','.join([street, city, state, zip_code]))
 
 order = Order(store, customer, address)
 order.add_item('P12IPAZA')

@@ -15,4 +15,6 @@ cd pizzapi
 sudo python3 setup.py install
 cd ..
 
-# Clone PyGithub
+# Install PyGithub
+pip3 install PyGithub
+
