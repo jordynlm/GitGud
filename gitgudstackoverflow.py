@@ -2,10 +2,14 @@ import requests
 import re
 import sys
 
-print(sys.argv[1:])
-query=" ".join(sys.argv[1:])
+file = open(sys.argv[1],'r')
+contents = file.readlines()
+print(contents)
+query=contents[-1]
+print(query)
 print("Searching Stack Overflow for error message: " + query)
-queryplus = query.replace(" ","+")
+querynoquotes= query.replace("\"","").replace("\'","")
+queryplus = querynoquotes.replace(" ","+")
 url = "https://stackoverflow.com/search?q="+queryplus
 print("Search URL "+ url)
 a = requests.get(url)

@@ -21,9 +21,7 @@ case $1 in
         $GITGUD_PATH/clone_from_user.sh $2 $3
 	;;
     "error-check")
-        #data=$(cat)
-        #python3 $GITGUD_PATH/gitgudstackoverflow.py $data
-	$GITGUD_PATH/get_error.sh
+        $GITGUD_PATH/get_error.sh "$2"
         ;;
     "help")
         printf "%s\n" "Usage: gitgud [arg]. The available arguments are:"
