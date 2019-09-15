@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $# = "0" ]]; then
-    printf "Error: no argument provided\n"
+    printf "Welcome to GitGud! Run 'gitgud help' to see the commands and their usage.\n"
     exit 0
 fi
 
@@ -33,8 +33,14 @@ case $1 in
         printf "\t%s\n" "pull - pull all git repositories in current directory"
         printf "\t%s\n" "push - push all git repositories in current direcotry"
         printf "\t%s\n" "pizza - order pizza"
+	printf "\t%s\n" "clone-file - clone all git repositories listed in a specified .txt file"
+	printf "\t%s\n" "clone-user - clone all git repositories from a specified user.
+		 If you are the specified user, your private repos will also be downloaded.
+		 Must be called with two arguments as follows: gitgud clone-user {github username} {personal access token}"
+	printf "\t%s\n" "error-check - for a given command that produces an error, automatically search StackOverflow for that error and prints the first result. 
+ 		Must be called with one argument as follows: gitgud error-check {\"command\"}"
         printf "\t%s\n" "help - see this help text"
-        ;;
+	;;
     *)
         printf "Error: unrecognized argument. Run 'gitgud help' to see what arguments are available.\n"
         ;;
