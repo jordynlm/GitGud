@@ -28,12 +28,12 @@ function find_git_repos {
                 if [[ ${args[0]} = "log" ]]; then
                     printf "%s\n" "Attempting to ${args[0]} in $1"
                     echo "Attempting to ${args[0]} in $1
-                    " >> $org_dir/gitgud_err.txt
+                    " >> $log_file
                     
-                    ( cd $1 ; $git_command |& tee -a $org_dir/gitgud_err.txt )
+                    ( cd $1 ; $git_command |& tee -a $log_file )
                     
                     printf "%s\n" "-----------------------------------"
-                    echo "-----------------------------------" >> $org_dir/gitgud_err.txt
+                    echo "-----------------------------------" >> $log_file
                 else
                     printf "%s\n" "Attempting to ${args[0]} in $1"
                     ( cd $1 ; $git_command )
@@ -58,8 +58,17 @@ if [[ ${args[0]} = "push" ]]; then
     git_command="git push"
 fi
 if [[ ${args[1]} = "log" ]]; then
-    org_dir=$(pwd)
-    echo "" > gitgud_err.txt
+    if [[ ${args[2]} != "" ]]; then
+        log_file=${args[2]}
+        if [[ ${log_file:0:1} != "/" && ${log_file:0:1} != "~" && ${log_file:0:1} != "." ]]; then
+            org_dir=$(pwd)
+            log_file=$org_dir/$log_file
+        fi
+    else
+        org_dir=$(pwd)
+        log_file=$org_dir/gitgud_err.txt
+    fi
+    echo "" > $log_file
 fi
 find_git_repos .
 
