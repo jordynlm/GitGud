@@ -20,6 +20,9 @@ case $1 in
     "clone-user")
         $GITGUD_PATH/clone_from_user.sh $2 $3
 	;;
+    "clone-file")
+	$GITGUD_PATH/clone_from_file.sh
+	;;
     "error-check")
         #data=$(cat)
         #python3 $GITGUD_PATH/gitgudstackoverflow.py $data
