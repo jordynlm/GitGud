@@ -4,7 +4,6 @@
 #the script skips any lines preceded by a '%'
 
 #save credentials so that user does no have to reenter data
-git config --global credential.helper 'cache--timeout=900'
 
 #get file detailing repos
 echo Please input the name of the file listing the repos you would like to clone...
@@ -30,9 +29,16 @@ do
 	if [[ ! $line == *"%"* ]] && [ ! -z "$line" ]  
 	then
 		echo "Attempting to clone: $line"
+		git config --global credential.helper 'cache--timeout=900'
 		git clone $line
 	fi
 done
+
+if [ $ans == "Y" ]
+then
+	cd -
+fi
+
 
 echo "All repos $filename cloned."
 
